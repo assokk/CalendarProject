@@ -3,7 +3,7 @@ package org.example.basic.service;
 import lombok.RequiredArgsConstructor;
 import org.example.basic.dto.MemberRequestDto;
 import org.example.basic.dto.MemberResponseDto;
-import org.example.basic.entity.Member;
+import org.example.basic.entity.Schedule;
 import org.example.basic.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +19,8 @@ public class MemberService {
 
     @Transactional
     public MemberResponseDto save(MemberRequestDto memberRequestDto) {
-        Member member = new Member(memberRequestDto.getName(), memberRequestDto.getPassword());
-        Member savedMember = memberRepository.save(member);
+        Schedule member = new Schedule(memberRequestDto.getName(), memberRequestDto.getPassword());
+        Schedule savedMember = memberRepository.save(member);
         return new MemberResponseDto(
                 savedMember.getId(),
                 savedMember.getName(),
@@ -31,9 +31,9 @@ public class MemberService {
 
     @Transactional(readOnly = true)
     public List<MemberResponseDto> findAll() {
-        List<Member> members = memberRepository.findAll();
+        List<Schedule> members = memberRepository.findAll();
         List<MemberResponseDto> memberResponseDtos = new ArrayList<>();
-        for (Member member : members) {
+        for (Schedule member : members) {
             memberResponseDtos.add(new MemberResponseDto(
                     member.getId(),
                     member.getName(),
